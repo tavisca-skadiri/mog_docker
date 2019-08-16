@@ -33,7 +33,8 @@
         {
             steps {
                 echo "Building DockerImage"
-				sh "docker ps"
+		sh "docker run --privileged -d docker:dind"
+                sh "docker build -t mog -f ./.infra/docker/Dockerfile ."
             }
         }
         stage('Publish DockerImage')
