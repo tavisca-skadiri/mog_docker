@@ -33,7 +33,7 @@
         {
             steps {
                 echo "Building DockerImage"
-                sh "docker build -t mog -f ./.infra/docker/Dockerfile ."
+                sh "docker build -t "mog" -f .infra/docker/Dockerfile ."
             }
         }
         stage('Publish DockerImage')
@@ -41,14 +41,17 @@
             steps {
                 sh script: '''
                     echo "I am Pubishing DockerImage"
+		    docker commit mog:latest
+		    docker tag mog:latest saqlainkadiri/mog:latest
+                    docker push saqlainkadiri/mog:latest
                 ''',
             label: "Publishing Docker Image"
-            }
-        }
+            	}
+	}
     }
-	post{
+    post{
     	always{
-			deleteDir()
-		}
+		deleteDir()
+	}
     }
 }
