@@ -31,9 +31,6 @@
         }
         stage('Build DockerImage')
         {
-	    agent {
-		docker { image 'node:7-alpine' }
-	    }
             steps {
                 echo "Building DockerImage"
 	        sh "systemctl enable docker"
