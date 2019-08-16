@@ -34,8 +34,7 @@
             steps {
                 echo "Building DockerImage"
                 sh "docker build -t mog -f .infra/docker/Dockerfile ."
-		sh "docker commit mog:latest"
-            }
+	    }
         }
         stage('Publish DockerImage')
         {
