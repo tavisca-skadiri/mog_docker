@@ -31,6 +31,9 @@
         }
         stage('Build DockerImage')
         {
+	    agent {
+		docker { image 'node:7-alpine' }
+	    }
             steps {
                 echo "Building DockerImage"
                 sh "docker build -t mog -f ./.infra/docker/Dockerfile ."
