@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.regex.Pattern;
 class RomanNumberUtils {
-    static final HashMap<String,Double> romanToIntegerMap = new HashMap<>(){{
+    static final HashMap<String,Double> romanToIntegerMap = new HashMap<String, Double>(){{
         put("I",1.0);
         put("V",5.0);
         put("X",10.0);

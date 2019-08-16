@@ -9,13 +9,13 @@ class MerchantGalaxyTest {
     private ArrayList<String> input,input2;
     @BeforeEach
     void beforeAll(){
-        input = new ArrayList<>(){{
+        input = new ArrayList<String>(){{
             add("glob is I");
             add("prok is V");
             add("pish is X");
             add("tegj is L");
         }};
-        input2 = new ArrayList<>(){{
+        input2 = new ArrayList<String>(){{
             add("glob glob Silver is 34 Credits");
             add("glob prok Gold is 57800 Credits");
             add("pish pish Iron is 3910 Credits");
