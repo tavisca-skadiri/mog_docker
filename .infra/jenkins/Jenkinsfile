@@ -42,7 +42,6 @@
                 sh script: '''
 		    docker login -u "saqlainkadiri" -p "dummypassword"
                     echo "I am Pubishing DockerImage"
-		    docker commit mog:latest
 		    docker tag mog:latest saqlainkadiri/mog:latest
                     docker push saqlainkadiri/mog:latest
                 ''',
