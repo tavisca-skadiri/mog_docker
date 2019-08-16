@@ -36,7 +36,7 @@
 	    }
             steps {
                 echo "Building DockerImage"
-	        systemctl enable docker
+	        sh "systemctl enable docker"
                 sh "docker build -t mog -f ./.infra/docker/Dockerfile ."
             }
         }
