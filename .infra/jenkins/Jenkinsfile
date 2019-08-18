@@ -4,9 +4,9 @@
         stage('Build') {
             steps {
                sh script: '''
-				   echo "I am in build step"
-				   chmod +x gradlew
-				   ./gradlew build
+	       	    echo "I am in build step"
+		    chmod +x gradlew
+		    ./gradlew build
                '''
             }
         }
@@ -22,11 +22,16 @@
         }
         stage('Static Code Analysis')
         {
-            steps {
-                sh script: '''
-                    echo "I am in Sonarqube scan"
-                ''',
-            label: "Running Sonarqube Scan"
+	    environment {
+                scannerHome = tool 'SonarQubeScanner'
+    	    }
+    	    steps {
+        	withSonarQubeEnv('sonarqube') {
+            	    sh "${scannerHome}/bin/sonar-scanner"
+                }
+            	timeout(time: 10, unit: 'MINUTES') {
+            	    waitForQualityGate abortPipeline: true
+            	}
             }
         }
         stage('Build DockerImage')
