@@ -24,9 +24,8 @@ pipeline {
         {
 	    steps{
 	   	sh script: '''
-		    echo "I am in Static Code Analysis step"
-		    ./gradlew sonarqube -Dsonar.projectKey=mogsaqlain -Dsonar.host.url=http://localhost:9000 -Dsonar.login=a0c5f22647dfb5d724df4cdb6751bec20bffc28b
-  		''',
+		echo "I am in Static Code Analysis step"
+		./gradlew sonarqube -Dsonar.projectKey=mogsaqlain -Dsonar.organization=skadiri -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=eb86dd433082444f559753c66cc65962ccd1d10f''',
             	label: "Running Static Code Analysis"
             }
         }
