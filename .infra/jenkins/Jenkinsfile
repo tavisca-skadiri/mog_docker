@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               bat script: '''
+               sh script: '''
 	       	    echo "I am in build step"
 		    chmod +x gradlew
 		    ./gradlew build
@@ -13,7 +13,7 @@ pipeline {
         stage('Test')
         {
             steps {
-                bat script: '''
+                sh script: '''
                     echo "I am in Test step"
                     ./gradlew test
                 ''',
@@ -23,9 +23,9 @@ pipeline {
         stage('Static Code Analysis')
         {
 	    steps{
-	   	bat script: '''
+	   	sh script: '''
 		    echo "I am in Static Code Analysis step"
-		    ./gradlew sonarqube -Dsonar.projectKey=mogsaqlain -Dsonar.host.url=http://localhost:9000 -Dsonar.login=a0c5f22647dfb5d724df4cdb6751bec20bffc28b
+		    # ./gradlew sonarqube -Dsonar.projectKey=mogsaqlain -Dsonar.host.url=http://localhost:9000 -Dsonar.login=a0c5f22647dfb5d724df4cdb6751bec20bffc28b
   		''',
             	label: "Running Static Code Analysis"
             }
@@ -34,13 +34,13 @@ pipeline {
         {
             steps {
                 echo "Building DockerImage"
-                bat "docker build -t mog -f .infra/docker/Dockerfile ."
+                sh "docker build -t mog -f .infra/docker/Dockerfile ."
 	    }
         }
         stage('Publish DockerImage')
         {
             steps {
-                bat script: '''
+                sh script: '''
 		    docker login -u "saqlainkadiri" -p "dummypassword"
                     echo "I am Pubishing DockerImage"
 		    docker tag mog:latest saqlainkadiri/mog:latest
