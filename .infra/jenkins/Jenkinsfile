@@ -22,16 +22,12 @@
         }
         stage('Static Code Analysis')
         {
-	    environment {
-                scannerHome = tool 'SonarQubeScanner'
-    	    }
-    	    steps {
-        	withSonarQubeEnv('sonarqube') {
-            	    sh "${scannerHome}/bin/sonar-scanner"
-                }
-            	timeout(time: 10, unit: 'MINUTES') {
-            	    waitForQualityGate abortPipeline: true
-            	}
+	    steps{
+	   	sh script: '''
+		    echo "I am in Static Code Analysis step"
+		    ./gradlew sonarqube -Dsonar.projectKey=mogsaqlain -Dsonar.host.url=http://localhost:9096 -Dsonar.login=b6f81d749293562450230fd39322be70c07ed63b
+                ''',
+            	label: "Running Static Code Analysis"
             }
         }
         stage('Build DockerImage')
